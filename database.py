@@ -40,6 +40,18 @@ def salvar_abastecimento(data, km, valor_litro, litros):
     conexao.commit()
     conexao.close()
 
+def buscar_dados(filtro_sql=""):
+    conexao = sqlite3.connect('controle_abastecimento.db')
+    cursor = conexao.cursor()
+    
+    # A base do comando é sempre a mesma
+    sql = f"SELECT * FROM abastecimentos {filtro_sql}"
+    
+    cursor.execute(sql)
+    dados = cursor.fetchall()
+    
+    conexao.close()
+    return dados
 
 if __name__ == "__main__":
     inicializar_banco()
