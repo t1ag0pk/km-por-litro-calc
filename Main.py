@@ -207,7 +207,7 @@ def excluir_abastecimento():
 
 
 
-    print(f"{Cor.CIANO}\nDeseja confirmar a opção de cancelamento?{Cor.RESET}")
+    print(f"{Cor.CIANO}\nDeseja confirmar a exclusão dos dados acima?{Cor.RESET}")
 
     while True: #pegar a confirmação de forma segura recebendo um número
         try:
@@ -226,7 +226,7 @@ def excluir_abastecimento():
             print(f"{Cor.AMARELO}Ocorreu algum erro, não foi possível concluir a operação\n{Cor.VERMELHO}Operação falhou{Cor.RESET}")
         print(f"{Cor.AMARELO}Operação finalizada com sucesso os dados foram excluídos.\n{Cor.VERDE}Operação finalizada.{Cor.RESET}")
     else:
-        print(f"{Cor.VERMELHO}Operação cancelada!{Cor.RESET}")
+        print(f"{Cor.AMARELO}Operação de exclusão cancelada \n{Cor.VERMELHO}Operação finalizada!{Cor.RESET}")
 
 
 def menu():
