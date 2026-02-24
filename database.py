@@ -53,6 +53,21 @@ def buscar_dados(filtro_sql=""):
     conexao.close()
     return dados
 
+def busca_por_id(busca_id):
+    conexao = sqlite3.connect('controle_abastecimento.db')
+    cursor =conexao.cursor()
+
+    sql = f"SELECT * FROM abastecimentos WHERE id = ?"
+
+    cursor.execute(sql, (busca_id,))
+
+    conexao.commit()
+    resultado = cursor.fetchone()
+    conexao.close()
+    return resultado
+
+
+
 def excluir_dados(id_para_excluir):
     conexao = sqlite3.connect('controle_abastecimento.db')
     cursor =conexao.cursor()
