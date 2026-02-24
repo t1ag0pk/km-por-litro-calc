@@ -197,7 +197,7 @@ def excluir_abastecimento():
         print(f"{Cor.VERMELHO}Operação cancelada!{Cor.RESET}")
         return
     
-
+    # print dos dados a serem excluídos 
     print(f"{Cor.AMARELO}Dados a serem deletados:{Cor.RESET}")
     print(f"\n{Cor.AZUL}{'ID':<4} {'Data':^12} {'KM':^11} {'Preço/L':^8} {'Litros':^10} {'R$ Total':^10}{Cor.RESET}")
     print("-" * 60)
@@ -206,15 +206,38 @@ def excluir_abastecimento():
     print(f"{id_b:<4} {data:^12} {km_b:^11.0f} {v_l:^8.2f} {litros_b:^10.3f} {v_t:^10.2f}")
 
 
+
+    print(f"{Cor.CIANO}\nDeseja confirmar a opção de cancelamento?{Cor.RESET}")
+
+    while True: #pegar a confirmação de forma segura recebendo um número
+        try:
+            confirmar = int(input(f"Digite 0 para {Cor.VERDE}CONFIRMAR{Cor.RESET}\nDigite 1 para {Cor.VERMELHO}CANCELAR\n{Cor.RESET}"))
+            if confirmar not in [0, 1]:
+                print(f"{Cor.VERMELHO}Erro: Use apenas 0 ou 1{Cor.RESET}")
+                continue 
+            else:
+                break
+        except ValueError:
+            print(f"{Cor.VERMELHO}digite apenas números{Cor.RESET}")
+
+    if confirmar == 0:
+        execute = excluir_dados(id_usuario)
+        if not execute:
+            print(f"{Cor.AMARELO}Ocorreu algum erro, não foi possível concluir a operação\n{Cor.VERMELHO}Operação falhou{Cor.RESET}")
+        print(f"{Cor.AMARELO}Operação finalizada com sucesso os dados foram excluídos.\n{Cor.VERDE}Operação finalizada.{Cor.RESET}")
+    else:
+        print(f"{Cor.VERMELHO}Operação cancelada!{Cor.RESET}")
+
+
 def menu():
     while True:
-        print(f"\n{Cor.AZUL}=== SISTEMA KM POR LITRO ==={Cor.RESET}")
+        print(f"\n{Cor.AZUL}===== SISTEMA KM POR LITRO ====={Cor.RESET}")
         print("1. Cadastrar Novo Abastecimento")
-        print("2. Ver Histórico Completo")
-        print("3. Ver Último Consumo")
-        print("4. Ver Médias de Todos os Trechos")
-        print("5. Ver a Média entre o primeiro e último abstecimento")
-        print("6. Remover dados")
+        print("2. Ver Histórico de Abastecimentos Completo")
+        print("3. Ver Média de Consumo do último Mês")
+        print("4. Ver Média de Consumo de Todos os Meses")
+        print("5. Ver Média de Consumo Entre o Primeiro e Último Abastecimento")
+        print("6. Remover Dados de Abastecimento")
         print("7. Sair")
         
         opcao = input(f"\n{Cor.AMARELO}Escolha uma opção: {Cor.RESET}")
@@ -230,10 +253,9 @@ def menu():
         elif opcao == "5":
             calcular_consumo(registro="total")
         elif opcao == "6":
-            print("excluir abastecimento sairá em breve")
             excluir_abastecimento() 
         elif opcao == "7":
-            print(f"{Cor.VERDE}fechando!{Cor.RESET}")
+            print(f"{Cor.VERDE}Sistema finalizado com sucesso!{Cor.RESET}")
             break
         else:
             print(f"{Cor.VERMELHO}Opção inválida!{Cor.RESET}")
