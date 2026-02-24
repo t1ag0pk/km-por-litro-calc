@@ -53,6 +53,19 @@ def buscar_dados(filtro_sql=""):
     conexao.close()
     return dados
 
+def excluir_dados(id_para_excluir):
+    conexao = sqlite3.connect('controle_abastecimento.db')
+    cursor =conexao.cursor()
+
+    excluir = "DELETE FROM abastecimentos WHERE id = ?"
+
+    cursor.execute(excluir, (id_para_excluir,))
+
+    conexao.commit()
+    linhas_afetadas = cursor.rowcount
+    conexao.close()
+    return linhas_afetadas
+
 if __name__ == "__main__":
     inicializar_banco()
     print("Banco de dados inicializado com sucesso!")
